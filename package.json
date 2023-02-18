@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/ercsanchez/nodejs-api-design/issues"
   },
-  "homepage": "https://github.com/ercsanchez/nodejs-api-design#readme"
+  "homepage": "https://github.com/ercsanchez/nodejs-api-design#readme",
+  "devDependencies": {
+    "express": "^4.18.2"
+  }
 }
