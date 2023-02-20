@@ -11,8 +11,10 @@ app.use(express.urlencoded({extended: true}));
 
 // custom middleware
 app.use((req, res, next) => {
-  req.custom_middleware = 'custom middleware';
-  next();
+  // req.custom_middleware = 'custom middleware';
+  // next();
+  res.status(401)
+  res.send('Error')
 })
 
 app.get('/', (req, res) => {
