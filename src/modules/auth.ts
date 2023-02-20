@@ -19,11 +19,14 @@ export const protectRoute = (req, res, next) => {
   }
 
   // check if there is a token value after "Bearer" prefix
-  const [, token] = bearer.split(' ');
+  // const [, token] = bearer.split(' ');
 
-  if (!token) {
+  // check if token was prefixed with "Bearer"
+  const [prefix, token] = bearer.split(' ');
+
+  if (!token || !(prefix === "Bearer")) {
     res.status(401);
-    res.json({message: 'no token'});
+    res.json({message: 'not valid token'});
     return;
   }
 
