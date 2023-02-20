@@ -9,6 +9,12 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
+// custom middleware
+app.use((req, res, next) => {
+  req.custom_middleware = 'custom middleware';
+  next();
+})
+
 app.get('/', (req, res) => {
   console.log('express is running...');
   res.status(200);
