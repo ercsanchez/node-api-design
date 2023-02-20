@@ -7,3 +7,14 @@ export const createJWT = (user) => {
   )
   return token;
 }
+
+export const protectRoute = (req, res, next) => {
+  const bearer = req.headers.authorization;
+
+  // check if authorization header has a token
+  if (!bearer) {
+    res.status(401);
+    res.json({message: 'not authorized'})
+    return;
+  }
+}
