@@ -3,7 +3,7 @@ import { Router } from 'express';
 // not a constructor & just a regular function | capitalized coz of bad coding conventions
 const router = Router();
 
-router.get('/product', (req, res) => {res.json({message: 'products', "custom middlware message": req.custom_middleware})})
+router.get('/product', (req, res) => {res.json({message: 'products'})})
 router.get('/product/:id', () => {})
 router.put('/product/:id', () => {})
 router.post('/product', () => {})
