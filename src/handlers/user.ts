@@ -15,3 +15,23 @@ export const createNewUser = async (req, res) => {
   const token = createJWT(user);
   res.json({token})
 }
+
+export const signin = async (req, res) => {
+  // check if user already has an account
+  const user = await prisma.user.findUnique({
+    where: {
+      username: req.body.username
+    }
+  })
+
+  // check if hashedPassword in db is the same as current user's submitted password
+  const userIsValid = await comparePasswords(req.body.password, user.password);
+  if (!userIsValid) {
+    res.status(401);
+    res.json({message: "not authorized"});
+    return;
+  }
+
+  const token = createJWT(user);
+  res.json(token);
+}
