@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { body } from "express-validator";
 import { createProduct, deleteProduct, getAllProducts, getOneProduct, updateProduct } from './handlers/product';
+import { createUpdate, deleteUpdate, getAllUpdates, getOneUpdate, updateUpdate } from './handlers/update';
 import { handleInputErrors } from './modules/middleware';
 
 // not a constructor & just a regular function | capitalized coz of bad coding conventions
@@ -23,23 +24,25 @@ router.post('/product',
 
 router.delete('/product', deleteProduct)
 
-router.get('/update', () => {})
-router.get('/update/:id', () => {})
+router.get('/update', getAllUpdates)
+router.get('/update/:id', getOneUpdate)
 
 router.put('/update/:id',
   body('title').optional(),
   body('body').optional(),
   body('status').isIn(['IN_PROGRESS', 'SHIPPED', 'DEPRECATED']),
   body('version').optional(),
-  () => {})
+  updateUpdate
+  )
 
 router.post('/update',
   body('title').exists().isString(),
   body('body').exists().isString(),
   body('productId').exists().isString(),
-  () => {})
+  createUpdate
+  )
 
-router.delete('/update/:id', () => {})
+router.delete('/update/:id', deleteUpdate)
 
 router.get('/updatepoint', () => {})
 router.get('/updatepoint/:id', () => {})
