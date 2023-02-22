@@ -1,26 +1,27 @@
 import { Router } from 'express';
 import { body } from "express-validator";
+import { createProduct, deleteProduct, getAllProducts, getOneProduct, updateProduct } from './handlers/product';
 import { handleInputErrors } from './modules/middleware';
 
 // not a constructor & just a regular function | capitalized coz of bad coding conventions
 const router = Router();
 
-router.get('/product', (req, res) => {res.json({message: 'products'})})
+router.get('/product', getAllProducts)
 
-router.get('/product/:id', () => {})
+router.get('/product/:id', getOneProduct)
 router.put(
   '/product/:id',
   body('name').isString(),
   handleInputErrors,
-  (req, res) => {}
+  updateProduct
 ) // req.body (a json) should have a field called name
 
 router.post('/product',
   body('name').isString(),
   handleInputErrors,
-  () => {})
+  createProduct)
 
-router.delete('/product', () => {})
+router.delete('/product', deleteProduct)
 
 router.get('/update', () => {})
 router.get('/update/:id', () => {})
