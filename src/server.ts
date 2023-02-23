@@ -29,7 +29,7 @@ app.use(express.urlencoded({extended: true}));
 // })
 
 
-app.get('/', (req, res) => {
+app.get('/', (req, res, next) => {
   // console.log('express is running...');
   // res.status(200);
   // res.json({message: 'hello'});
@@ -39,7 +39,7 @@ app.get('/', (req, res) => {
 
   // async error
   setTimeout(() => {
-    throw new Error('sample async error');
+    next(new Error('sample async error'));
   }, 1)
 })
 
