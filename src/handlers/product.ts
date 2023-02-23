@@ -25,14 +25,20 @@ export const getOneProduct = async (req, res) => {
 }
 
 // Create one
-export const createProduct = async (req, res) => {
-  const product = await prisma.product.create({
-    data: {
-      name: req.body.name,
-      belongsToId: req.user.id
-    }
-  })
-  res.json({data: product})
+export const createProduct = async (req, res, next) => {
+  try {
+    const product = await prisma.product.create({
+      data: {
+        name: req.body.name,
+        belongsToId: req.user.id
+      }
+    })
+    res.json({data: product})
+  } catch (e) {
+    // all errors default to 500 if no e.type specified
+    next(e);
+  }
+
 }
 
 // Update one
