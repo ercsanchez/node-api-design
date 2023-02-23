@@ -30,17 +30,17 @@ app.use(express.urlencoded({extended: true}));
 
 
 app.get('/', (req, res, next) => {
-  // console.log('express is running...');
-  // res.status(200);
-  // res.json({message: 'hello'});
+  console.log('express is running...');
+  res.status(200);
+  res.json({message: 'hello'});
 
   // throw an error and make express' handle it
   // throw new Error('sample error');
 
   // async error
-  setTimeout(() => {
-    next(new Error('sample async error'));
-  }, 1)
+  // setTimeout(() => {
+  //   next(new Error('sample async error'));
+  // }, 1)
 })
 
 app.use('/api', protectRoute, router)
@@ -49,8 +49,16 @@ app.post('/user', createNewUser);
 app.post('/signin', signin);
 
 app.use((err, req, res, next) => {
-  console.error(err);
-  res.json({message: err.message})
+  // console.error(err);
+  // res.json({message: err.message})
+
+  if (err.type === "auth") {
+    res.status(401).json({message: 'unauthorized'})
+  } else if (err.type === 'input') {
+    res.status(400).json({message: 'invalid input'})
+  } else {
+    res.status(500).json({message: 'server error'})
+  }
 });
 
 export default app;
