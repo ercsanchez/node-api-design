@@ -35,7 +35,12 @@ app.get('/', (req, res) => {
   // res.json({message: 'hello'});
 
   // throw an error and make express' handle it
-  throw new Error('sample error');
+  // throw new Error('sample error');
+
+  // async error
+  setTimeout(() => {
+    throw new Error('sample async error');
+  }, 1)
 })
 
 app.use('/api', protectRoute, router)
