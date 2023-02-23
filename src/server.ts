@@ -43,4 +43,9 @@ app.use('/api', protectRoute, router)
 app.post('/user', createNewUser);
 app.post('/signin', signin);
 
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.json({message: err.message})
+});
+
 export default app;
