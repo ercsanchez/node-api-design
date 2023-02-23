@@ -30,9 +30,12 @@ app.use(express.urlencoded({extended: true}));
 
 
 app.get('/', (req, res) => {
-  console.log('express is running...');
-  res.status(200);
-  res.json({message: 'hello'});
+  // console.log('express is running...');
+  // res.status(200);
+  // res.json({message: 'hello'});
+
+  // throw an error and make express' handle it
+  throw new Error('sample error');
 })
 
 app.use('/api', protectRoute, router)
